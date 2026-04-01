@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="mb-4">バイト登録</h2>
+
+    <form method="post" action="{{url_for('addjob')}}">
+        <table class="table table-bordered text-center">
+            <thead class="table-light">
+                <tr>
+                    <th>バイト名</th>
+                    <th>時給</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>
+                        <input class="form-control" type="text" name="name" placeholder="例：コンビニ">
+                    </td>
+                    <td>
+                        <input class="form-control" type="number" name="yph" placeholder="例：1000">
+                    </td>
+                    <td>
+                        <input class="btn btn-success w-100" type="submit" value="登録">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <a href="{{url_for('record')}}" class="btn btn-primary mt-3">戻る</a>
+
+</div>
+
+{% endblock %}

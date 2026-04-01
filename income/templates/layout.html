@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>収益確認アプリ</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <style>
+        body {
+            padding-top: 50px;
+            background-color: lightgrey;
+        }
+
+        .starter-template {
+            padding: 40px 15px;
+            background-color: white;
+        }
+    </style>
+    <title>収益確認アプリ</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{url_for('index')}}">収益確認アプリ</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="{{url_for('index')}}">Home</a></li>
+                    <li><a href="overview">記録の閲覧</a></li>
+                    <li><a href="record">記録の追加</a></li>
+                    <li><a href="add_job">仕事の追加</a></li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+    <div class="container">
+        <h1>収益確認アプリ</h1>
+    </div>
+
+
+    {% block content %}
+    {% endblock %}
+
+    </div>
+
+</body>
+
+</html>
