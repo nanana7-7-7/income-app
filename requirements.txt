@@ -81,7 +81,6 @@ prompt_toolkit==3.0.52
 psutil==7.1.0
 pure_eval==0.2.3
 pycparser==2.23
-pygame==2.6.1
 Pygments==2.19.2
 pyparsing==3.2.5
 pytesseract==0.3.13
