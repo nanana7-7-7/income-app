@@ -28,3 +28,14 @@ def create_worktimes_table():
                 )
                 """)
     con.close()
+    
+def create_users_table():
+    con = sqlite3.connect("database_income.db")
+    con.execute("""
+    CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT UNIQUE,
+        password TEXT
+    )
+    """)
+    con.close()

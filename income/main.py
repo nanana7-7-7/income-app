@@ -1,12 +1,14 @@
-from flask import Flask, render_template, request,redirect,url_for,Response
+from flask import Flask, render_template, request,redirect,url_for,Response, session
 import sqlite3
 import matplotlib.pyplot as plt
 import io
 
 app=Flask(__name__)
+app.secret_key="secret123"
 
 import income.db as db
 
+db.create_users_table()
 db.create_jobs_table()
 db.create_worktimes_table()
 
@@ -15,6 +17,9 @@ DATABASE="database_income.db"
 
 @app.route("/")
 def index():
+    if "user_id" not in session:
+        return redirect(url_for('login'))
+    
     con=sqlite3.connect(DATABASE)
     db_jobs=con.execute("SELECT * FROM jobs").fetchall()
     con.close()
@@ -137,6 +142,54 @@ def delete_worktime(id):
 
     return redirect(url_for('record_time',id=job_id))
 
+@app.route("/register", methods=["GET","POST"])
+def register():
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+
+        con = sqlite3.connect(DATABASE)
+        try:
+            con.execute("INSERT INTO users (username, password) VALUES (?,?)",
+                        (username, password))
+            con.commit()
+        except:
+            return "ユーザー名使われてる"
+        finally:
+            con.close()
+
+        return redirect(url_for("login"))
+
+    return render_template("register.html")
+
+
+@app.route("/login", methods=["GET","POST"])
+def login():
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+
+        con = sqlite3.connect(DATABASE)
+        user = con.execute(
+            "SELECT * FROM users WHERE username=? AND password=?",
+            (username, password)
+        ).fetchone()
+        con.close()
+
+        if user:
+            session["user_id"] = user[0]
+            return redirect(url_for("index"))
+        else:
+            return "ログイン失敗"
+
+    return render_template("login.html")
+
+
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("login"))
 
 
 
