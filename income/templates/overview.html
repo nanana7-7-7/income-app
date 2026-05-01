@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<table class="table table-striped" border="1">
+    <tr>
+        <th>仕事名</th>
+        <th>基本時給</th>
+        <th>合計時間</th>
+        <th>合計収益</th>
+        <th></th>
+    </tr>
+    {% for job in jobs %}
+    <tr>
+        <td>{{job.name}}</td>
+        <td>{{job.yph}}</td>
+        <td>{{job.total_time}}</td>
+        <td>{{job.yph * job.total_time}}</td>
+        <td>
+            <form action="{{url_for('graph_showpage', id=job.id)}}" method="post">
+                <button class="btn btn-info" type="submit">詳しく</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<a href="{{url_for('index')}}" class="btn btn-primary">ホームに戻る</a>
+
+
+{% endblock %}
