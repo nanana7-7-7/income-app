@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request,redirect,url_for,Response
-from . import app
 import sqlite3
 import matplotlib.pyplot as plt
 import io
